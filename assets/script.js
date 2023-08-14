@@ -17,7 +17,10 @@ var timer;
 var score;
 
 var questions = ['Arrays in JavaScript can be used to store:', 'Commonly used data types include:'];
-var answers1 = ['Other arrays', 'Strings', 'Numbers', 'Booleans', 'All of the above'];
+var a = ['Other arrays', 'Booleans']
+var b = ['Numbers and strings', 'Strings']
+var c = ['Booleans', 'Numbers']
+var d = ['All of the above', 'All of the above']
 
 function init() {
     viewScores.textContent = 'View High Scores';
@@ -36,8 +39,10 @@ function start () {
     score = 0;
     count = 10;
    
-    countDown();
+    resetScreen();
     renderQuiz();
+    countDown();
+    
 }
 
 function countDown() {
@@ -54,17 +59,37 @@ function countDown() {
     }, 1500);
 }
 
-function renderQuiz() {
-    var ulEl = document.createElement('ul');
-    var qText = document.createElement('h2');
-    qText.textContent = 'question';
-    var liEl = document.createElement('li');
-    liEl.textContent = 'First answer liEl';
-    
-    gameText.appendChild(ulEl);
-    gameText.appendChild(qText);
-    qText.appendChild(liEl);
+function resetScreen() {
+    gameText.removeChild(gameTitle);
+    gameText.removeChild(introText);
+    gameText.removeChild(startButton);
+}
 
+function renderQuiz() {
+    i = 0;
+    var q = document.createElement('ul');
+    var a1 = document.createElement('li');
+    var a2 = document.createElement('li');
+    var a3 = document.createElement('li');
+    var a4 = document.createElement('li');
+    var qText = document.createElement('h2');
+    var submitButton = document.createElement('button');
+
+    submitButton.textContent = 'Submit';
+
+    qText.textContent = questions[i];
+    a1.textContent = a[i];
+    a2.textContent = b[i];
+    a3.textContent = c[i];
+    a4.textContent = d[i];
+    
+    gameText.appendChild(q);
+    gameText.appendChild(qText);
+    gameText.appendChild(a1);
+    gameText.appendChild(a2);
+    gameText.appendChild(a3);
+    gameText.appendChild(a4);
+    gameText.appendChild(submitButton);
 }
 
 
