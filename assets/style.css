@@ -21,3 +21,19 @@ h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+ul {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+ul li {
+    text-align: left;
+    border: 2px solid black;
+    width: 20%;
+    padding: 8px;
+    margin: 5px;
+    list-style-type: none;
+    font-weight: bold;
+    background-color: rgb(70, 238, 70);
+}
