@@ -36,14 +36,27 @@ var count;
 var timer;
 var score;
 
-var questions = ['Arrays in JavaScript can be used to store:', 'Commonly used data types include:'];
-var a = ['Other arrays', 'Bumpkins']
-var b = ['Numbers and strings', 'Flings']
-var c = ['Booleans', 'Numbers']
-var d = ['All of the above', 'Objects']
-var correctAnswers = ['All of the above', 'Numbers']
+var questions = [
+    'JavaScript is a(n) ___ language', 
+    'Which of the following is used to define a variable?', 
+    'The .push() method does what?', 
+    'The argument of a function must contain ___ to use event.preventDefault', 
+    'What method checks if an item is in an array?', 
+    'A Boolean expression can result in which values?',
+    'If isNaN(x) returns true, then x',
+    'What method removes an item from an array?',
+    'The default input type of a form is',
+    'A form input type which allows one option of many to be selected is called',
+    'A form input type which allows one or more options of many to be selected is called',
+    "document.querySelector('#x') will",
+    "document.createElement('h1') will"];
+var a = ['Object-Oriented', 'Var', 'Shuffles an array', 'event', '.contains()', 'null', 'Is not a number', '.unshift()', 'text', 'text', 'text', 'Select all h1 elements', 'Create an h1 element']
+var b = ['Object-Based', 'Let', 'Adds an item to the end of an array', 'e', '.includes()', 'true', 'Is a number', '.push()', 'radio', 'radio', 'radio', 'Select elements with the class x', 'Select all h1 elements']
+var c = ['Procedural', 'Const', 'Removes an item from an array', 'prevent', '.matches()', 'false', 'Is true', '.pop()', 'button', 'button', 'button', 'Select the element with the id x', 'Select the first occurence of an h1 element']
+var d = ['None of the above', 'All of the above', 'Adds an item to the beginning of an array', 'default', '.pop()', 'All of the above', 'Is false', '.toUpperCase()', 'checkbox', 'checkbox', 'checkbox', 'Create an element with the id x', 'Select the element with the id h1']
+var correctAnswers = ['Object-Oriented', 'All of the above', 'Adds an item to the end of an array', 'event', '.includes()', 'Is not a number', '.pop()', 'text', 'radio', 'checkbox', 'Select the element with the id x', 'Create an h1 element']
 
-score = 100;
+score = 50;
 
 function init() {
     
@@ -56,7 +69,7 @@ function init() {
 }
 
 function start () {
-    count = 10;
+    count = 30;
    
     resetScreen();
     renderQuiz();
@@ -68,6 +81,7 @@ function countDown() {
     timer = setInterval( function() {
         
         count--;
+        score = score - 5;
         timerEl.textContent = 'Time: ' + count;
 
         if(count === 0) {
@@ -107,9 +121,10 @@ quizDiv.addEventListener('click', function submitAns(e){
             score = score + 10;
         } else { score = score - 10}
     }
-
+    console.log(score);
     i++;
     renderQuiz(); 
+
 
 });
 
