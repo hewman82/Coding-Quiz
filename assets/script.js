@@ -7,34 +7,41 @@ viewScores.textContent = 'View High Scores';
 timerEl.textContent = 'Time:';
 
 var gameText = document.querySelector('.game-text');
-
-
-
+var intro = document.querySelector('#intro');
 var gameTitle = document.createElement('h1');
 var introText = document.createElement('p');
 var startButton = document.createElement('button');
-
-
-
 
 gameTitle.textContent = 'JavaScript Quiz';
 introText.textContent = 'Welcome to my coding quiz. Select as many correct answers as you can within the time; go for the highscore!';
 startButton.textContent = 'Start';
 
 var quizDiv = document.querySelector('#quiz');
-var quesText = document.querySelector('#ques-text');
-var ansButtons = document.querySelector('.answer-list')
+var quesText = document.createElement('h2');
+var ansList = document.querySelector('.answer-list')
 
 var ans1 = document.createElement('li');
 var ans2 = document.createElement('li');
 var ans3 = document.createElement('li');
 var ans4 = document.createElement('li');
 
-var i = 0;
+var endGameText = document.createElement('h2');
+var userScoreText = document.createElement('h3');
+var saveScoreText = document.createElement('p');
+var userIn = document.createElement('input');
+var submitBttn = document.createElement('button');
+submitBttn.textContent = 'Submit';
+
+var saveDiv = document.querySelector('#save-score')
+
 
 var count;
 var timer;
 var score;
+var finalScore;
+var highScore = 0;
+var scoreList;
+var i = 0;
 
 var questions = [
     'JavaScript is a(n) ___ language', 
@@ -43,13 +50,13 @@ var questions = [
     'The argument of a function must contain ___ to use event.preventDefault', 
     'What method checks if an item is in an array?', 
     'A Boolean expression can result in which values?',
-    'If isNaN(x) returns true, then x',
+    'If isNaN(x) returns true, then x:',
     'What method removes an item from an array?',
-    'The default input type of a form is',
-    'A form input type which allows one option of many to be selected is called',
-    'A form input type which allows one or more options of many to be selected is called',
-    "document.querySelector('#x') will",
-    "document.createElement('h1') will"];
+    'The default input type of a form is:',
+    'A form input type which allows one option of many to be selected is called:',
+    'A form input type which allows one or more options of many to be selected is called:',
+    "document.querySelector('#x') will:",
+    "document.createElement('h1') will:"];
 var a = ['Object-Oriented', 'Var', 'Shuffles an array', 'event', '.contains()', 'null', 'Is not a number', '.unshift()', 'text', 'text', 'text', 'Select all h1 elements', 'Create an h1 element']
 var b = ['Object-Based', 'Let', 'Adds an item to the end of an array', 'e', '.includes()', 'true', 'Is a number', '.push()', 'radio', 'radio', 'radio', 'Select elements with the class x', 'Select all h1 elements']
 var c = ['Procedural', 'Const', 'Removes an item from an array', 'prevent', '.matches()', 'false', 'Is true', '.pop()', 'button', 'button', 'button', 'Select the element with the id x', 'Select the first occurence of an h1 element']
@@ -63,9 +70,10 @@ function init() {
     header.appendChild(viewScores);
     header.appendChild(timerEl);
 
-    gameText.appendChild(gameTitle);
-    gameText.appendChild(introText);
-    gameText.appendChild(startButton);
+    gameText.appendChild(intro);
+    intro.appendChild(gameTitle);
+    intro.appendChild(introText);
+    intro.appendChild(startButton);
 }
 
 function start () {
@@ -86,6 +94,8 @@ function countDown() {
 
         if(count === 0) {
             clearInterval(timer);
+            endGame();
+
         }
 
 
@@ -93,9 +103,9 @@ function countDown() {
 }
 
 function resetScreen() {
-    gameText.removeChild(gameTitle);
-    gameText.removeChild(introText);
-    gameText.removeChild(startButton);
+    intro.removeChild(gameTitle);
+    intro.removeChild(introText);
+    intro.removeChild(startButton);
 }
 
 function renderQuiz() {
@@ -105,29 +115,66 @@ function renderQuiz() {
     ans3.textContent = c[i];
     ans4.textContent = d[i];
 
-    
-    
-    ansButtons.appendChild(ans1);
-    ansButtons.appendChild(ans2);
-    ansButtons.appendChild(ans3);
-    ansButtons.appendChild(ans4);
+    gameText.appendChild(quesText);
+    gameText.appendChild(ansList);
+    ansList.appendChild(ans1);
+    ansList.appendChild(ans2);
+    ansList.appendChild(ans3);
+    ansList.appendChild(ans4);
 
 }
 
-quizDiv.addEventListener('click', function submitAns(e){
+ansList.addEventListener('click', function submitAns(e){
     var element = e.target;
     if(element.matches('li')) {
+    i++;    
         if(correctAnswers.includes(element.textContent)) {
             score = score + 10;
+
         } else { score = score - 10}
     }
-    console.log(score);
-    i++;
-    renderQuiz(); 
+    
+    if(i == questions.length) {
+        localStorage.setItem('playerScore', score);
+        if(score > highScore) {
+            highScore = score;
+        }
+        endGame();
+    } else {
+        renderQuiz(); 
+    }
 
 
 });
 
+function endGame() {
+    header.removeChild(viewScores);
+    header.removeChild(timerEl);
+    gameText.removeChild(quesText);
+    ansList.removeChild(ans1);
+    ansList.removeChild(ans2);
+    ansList.removeChild(ans3);
+    ansList.removeChild(ans4);
+    
+
+    endGameText.textContent = ('Fin!');
+    userScoreText.textContent = ('Your score is ' + localStorage.getItem('playerScore') + '/30');
+    saveScoreText.textContent = ('Save your score?');
+    userIn.setAttribute('placeholder', 'Your initials here');
+
+    gameText.appendChild(saveDiv);
+    saveDiv.appendChild(endGameText);
+    saveDiv.appendChild(userScoreText);
+    saveDiv.appendChild(saveScoreText);
+    saveDiv.appendChild(userIn);
+    saveDiv.appendChild(submitBttn);
+}
+
+submitBttn.addEventListener('click', function displayHighScores() {
+
+    
+    
+})
 
 
 
