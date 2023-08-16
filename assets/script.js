@@ -28,11 +28,16 @@ var ans4 = document.createElement('li');
 var endGameText = document.createElement('h2');
 var userScoreText = document.createElement('h3');
 var saveScoreText = document.createElement('p');
-var userIn = document.createElement('input');
+var saveIn = document.createElement('input');
 var submitBttn = document.createElement('button');
 submitBttn.textContent = 'Submit';
+var cancelBttn = document.createElement('button');
 
 var saveDiv = document.querySelector('#save-score')
+
+
+var displayDiv = document.querySelector('#display-scores');
+var scoresList = document.querySelector('.scores-list');
 
 
 var count;
@@ -40,7 +45,6 @@ var timer;
 var score;
 var finalScore;
 var highScore = 0;
-var scoreList;
 var i = 0;
 
 var questions = [
@@ -79,33 +83,25 @@ function init() {
 function start () {
     count = 30;
    
-    resetScreen();
+    gameText.removeChild(intro);
     renderQuiz();
     countDown();
-    
 }
 
 function countDown() {
     timer = setInterval( function() {
-        
-        count--;
-        score = score - 5;
-        timerEl.textContent = 'Time: ' + count;
 
         if(count === 0) {
             clearInterval(timer);
             endGame();
 
+        } else {
+            count--;
+            score = score - 5;
+            timerEl.textContent = 'Time: ' + count;
         }
 
-
     }, 1500);
-}
-
-function resetScreen() {
-    intro.removeChild(gameTitle);
-    intro.removeChild(introText);
-    intro.removeChild(startButton);
 }
 
 function renderQuiz() {
@@ -115,13 +111,13 @@ function renderQuiz() {
     ans3.textContent = c[i];
     ans4.textContent = d[i];
 
-    gameText.appendChild(quesText);
-    gameText.appendChild(ansList);
+    gameText.appendChild(quizDiv);
+    quizDiv.appendChild(quesText);
+    quizDiv.appendChild(ansList);
     ansList.appendChild(ans1);
     ansList.appendChild(ans2);
     ansList.appendChild(ans3);
     ansList.appendChild(ans4);
-
 }
 
 ansList.addEventListener('click', function submitAns(e){
@@ -135,47 +131,64 @@ ansList.addEventListener('click', function submitAns(e){
     }
     
     if(i == questions.length) {
-        localStorage.setItem('playerScore', score);
-        if(score > highScore) {
-            highScore = score;
-        }
+        clearInterval(timer);
         endGame();
     } else {
         renderQuiz(); 
     }
-
-
 });
 
 function endGame() {
     header.removeChild(viewScores);
     header.removeChild(timerEl);
-    gameText.removeChild(quesText);
-    ansList.removeChild(ans1);
-    ansList.removeChild(ans2);
-    ansList.removeChild(ans3);
-    ansList.removeChild(ans4);
+    gameText.removeChild(quizDiv);
     
-
     endGameText.textContent = ('Fin!');
-    userScoreText.textContent = ('Your score is ' + localStorage.getItem('playerScore') + '/30');
-    saveScoreText.textContent = ('Save your score?');
-    userIn.setAttribute('placeholder', 'Your initials here');
+    userScoreText.textContent = ('Your score is ' + score + '/30');
+    saveScoreText.textContent = ('Save your score:');
+    saveIn.setAttribute('placeholder', 'Your initials here');
 
     gameText.appendChild(saveDiv);
     saveDiv.appendChild(endGameText);
     saveDiv.appendChild(userScoreText);
     saveDiv.appendChild(saveScoreText);
-    saveDiv.appendChild(userIn);
+    saveDiv.appendChild(saveIn);
     saveDiv.appendChild(submitBttn);
 }
 
-submitBttn.addEventListener('click', function displayHighScores() {
+submitBttn.addEventListener('click', function saveScores() {
+    var userInput = {
+       saveIn: saveIn.value,
+       "score": score
+    }
 
+    localStorage.setItem("userInput", JSON.stringify(userInput));
     
-    
+    gameText.removeChild(saveDiv);
+    displayScores();
 })
 
+function displayScores() {
+    var lastScore = JSON.parse(localStorage.getItem('userInput'));
+    var player = document.createElement('li');
+    player.innerHTML = lastScore.saveIn + ' - ' + lastScore.score;
+    
+    
+
+    var hsText = document.createElement('h2');
+    hsText.textContent = ('Highscores');
+    var backBttn = document.createElement('button');
+    backBttn.textContent = ('Go Back');
+    var clearBttn = document.createElement('button');
+    clearBttn.textContent = ('Clear Highscores');
+
+    gameText.appendChild(displayDiv);
+    displayDiv.appendChild(hsText);
+    displayDiv.appendChild(scoresList);
+    scoresList.appendChild(player);
+    scoresList.appendChild(backBttn);
+    scoresList.appendChild(clearBttn);
+}
 
 
 
