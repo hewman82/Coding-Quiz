@@ -19,6 +19,7 @@ header {
     margin: 10px;
 }
 
+/*viewScores p*/
 .view-score-text {
     color: rgb(77, 0, 128);
 }
@@ -32,6 +33,7 @@ header {
     text-align: center;
 }
 
+/*game title*/
 h1 {
     font-size: 50px;
     background: -webkit-linear-gradient(#5b06ed, #0cfa14);
@@ -59,16 +61,14 @@ button:hover {
 #intro p {
     font-size: 25px;
     margin-top: -10px;
+    width: 73%;
 }
 
+/*start button*/
 #intro button {
     height: 35px;
     width: 70px;
     font-size: 20px;
-}
-
-#intro p {
-    width: 73%;
 }
 
 #quiz {
@@ -79,15 +79,18 @@ button:hover {
     
 }
 
+/*quesText*/
 #quiz h2 {
     width: 50%;
     text-align: left;
 }
 
+/*rightWrongText*/
 #quiz p {
     background-color: gainsboro;
 }
 
+/*answer options and score list*/
 ul {
     width: 20%;
 }
@@ -102,7 +105,7 @@ ul li {
     background-color: var(--green);
 }
 
-ul li:hover {
+.answer-list li:hover {
     background-color: var(--greenhover);
     cursor: pointer;
 }
@@ -135,6 +138,7 @@ ul li:hover {
     left: 20px;
 }
 
+/*back and clear scores buttons*/
 #display-scores button {
     background-color: white;
     margin: 10px;
