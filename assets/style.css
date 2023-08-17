@@ -13,12 +13,10 @@ header {
     justify-content: space-between;
     padding: 10px;
     margin: 10px;
-    
 }
 
 .game-text {
     text-align: center;
-
 }
 
 h1 {
@@ -37,8 +35,15 @@ button:hover {
     background-color: var(--greenhover);
 }
 
+#intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #intro p {
     font-size: 25px;
+    margin-top: -10px;
 }
 
 #intro button {
@@ -47,11 +52,12 @@ button:hover {
     font-size: 20px;
 }
 
-h2 {
-    font-size: 30px;
+#intro p {
+    width: 73%;
 }
 
 ul {
+    margin-top: 20px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -74,6 +80,7 @@ ul li:hover {
 
 #save-score h2 {
     font-style: italic;
+    font-size: 30px;
 }
 
 #save-score input {
@@ -88,18 +95,17 @@ ul li:hover {
     height: 30px;
 }
 
-
-#display-scores {
+.buttons {
     display: flex;
-    flex-direction: column;
-
-
+    justify-content: center;
+    margin-left: 40px;
 }
 
 #display-scores button {
     background-color: white;
-    width: 80px;
-    height: 40px;
+    margin: 10px;
+    height: 30px;
+    width: 150px;
     
 }
 
