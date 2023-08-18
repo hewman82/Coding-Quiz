@@ -10,7 +10,7 @@ var intro = document.querySelector('#intro');
 var gameTitle = document.createElement('h1');
 gameTitle.textContent = 'JavaScript Quiz';
 var introText = document.createElement('p');
-introText.textContent = 'Welcome to my coding quiz. Select as many correct answers as you can within the time. Go for the highscore!';
+introText.textContent = 'Select as many correct answers as you can within the time. Go for the highscore!';
 var startButton = document.createElement('button');
 startButton.textContent = 'Start';
 

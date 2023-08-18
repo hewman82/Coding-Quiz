@@ -33,6 +33,12 @@ header {
     text-align: center;
 }
 
+.flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 /*game title*/
 h1 {
     font-size: 50px;
@@ -40,6 +46,12 @@ h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-top: -10px;
+}
+
+#intro p {
+    font-size: 25px;
+    margin-top: -10px;
+    width: 73%;
 }
 
 button {
@@ -52,18 +64,6 @@ button:hover {
     cursor: pointer;
 }
 
-#intro {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#intro p {
-    font-size: 25px;
-    margin-top: -10px;
-    width: 73%;
-}
-
 /*start button*/
 #intro button {
     height: 35px;
@@ -73,15 +73,11 @@ button:hover {
 
 #quiz {
     margin-top: -50px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    
 }
 
 /*quesText*/
 #quiz h2 {
-    width: 50%;
+    width: 40%;
     text-align: left;
 }
 
@@ -127,12 +123,6 @@ ul li {
     height: 30px;
 }
 
-#display-scores {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .buttons {
     position: relative;
     left: 20px;
@@ -149,4 +139,3 @@ ul li {
 #display-scores button:hover {
     background-color: rgb(94, 225, 242);
 }
-
